@@ -14,5 +14,5 @@ it('deve fazer a requisição da url', () => {
             redirecionar: false
         }
 
-    }).its('body.token').should('not.be.empty')
+    }).its('body.token').should('be.visible')
 })
