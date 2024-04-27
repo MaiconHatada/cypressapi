@@ -19,7 +19,18 @@
 //
 // -- This is a dual command --
 // Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('getToken', (user, passwd) => {
+    cy.request({
+        method: 'POST',
+        url: 'https://barrigarest.wcaquino.me/signin',
+        body: {
+            email: user, 
+            senha: passwd, 
+            redirecionar: false
+        }
+
+    }).its('body.token').should('not.be.empty')
+        .then(token => {
+            return token
+    })
+})
