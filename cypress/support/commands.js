@@ -19,6 +19,8 @@
 //
 // -- This is a dual command --
 // Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
+
+// Comando onde passamos o metodo POST - passando usuario e senha e pegamos o token e retornamos
 Cypress.Commands.add('getToken', (user, passwd) => {
     cy.request({
         method: 'POST',
@@ -32,5 +34,19 @@ Cypress.Commands.add('getToken', (user, passwd) => {
     }).its('body.token').should('not.be.empty')
         .then(token => {
             return token
+    })
+})
+
+Cypress.Commands.add('resetRest', () => {
+    cy.getToken('ferragens.saobraz@gmail.com', "12345678").then(token => {
+        cy.request({
+            method: 'GET',
+            url: 'https://barrigarest.wcaquino.me/reset',
+            headers: {
+
+                Authorization: `JWT ${token}`
+            },
+
+        }).its('status').should('eq',200)
     })
 })

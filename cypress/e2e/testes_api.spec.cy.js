@@ -10,6 +10,10 @@ describe('deve conseguir fazer os testes na api barriga react', () => {
         })
     })
 
+    beforeEach(() => {
+        cy.resetRest()
+    })
+
     it('deve fazer a requisição da url', () => {
         cy.request({
             method: 'POST',
@@ -28,5 +32,7 @@ describe('deve conseguir fazer os testes na api barriga react', () => {
 
   
     })
-})
 
+
+
+})
