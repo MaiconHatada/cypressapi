@@ -24,7 +24,7 @@
 Cypress.Commands.add('getToken', (user, passwd) => {
     cy.request({
         method: 'POST',
-        url: 'https://barrigarest.wcaquino.me/signin',
+        url: '/signin',
         body: {
             email: user, 
             senha: passwd, 
@@ -41,12 +41,29 @@ Cypress.Commands.add('resetRest', () => {
     cy.getToken('ferragens.saobraz@gmail.com', "12345678").then(token => {
         cy.request({
             method: 'GET',
-            url: 'https://barrigarest.wcaquino.me/reset',
-            headers: {
-
-                Authorization: `JWT ${token}`
-            },
+            url: '/reset',
+            headers: { Authorization: `JWT ${token}`},
+            })
 
         }).its('status').should('eq',200)
     })
-})
+
+
+Cypress.Commands.add('getContaByName', name => {
+    cy.getToken('ferragens.saobraz@gmail.com', "12345678").then(token => {
+        cy.request({
+            method: 'GET',
+            url: '/contas',
+            headers: { Authorization: `JWT ${token}`},
+            qs: {
+                    nome: name
+            }
+            }).then(res => {
+                return res.body[0].id
+            })
+        })
+    })
+
+
+
+
