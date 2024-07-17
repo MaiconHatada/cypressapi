@@ -11,9 +11,7 @@ describe.only('deve conseguir fazer os testes na api barriga react', () => {
         })
     })
 
-    beforeEach(() => {
-        cy.resetRest()
-    })
+   
     
 
     it('deve fazer a requisição da url', () => {
