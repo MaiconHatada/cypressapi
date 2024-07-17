@@ -1,7 +1,7 @@
 /// <reference types ="cypress" />
 const dayjs = require('dayjs')
 
-describe('deve conseguir fazer os testes na api barriga react', () => {
+describe.only('deve conseguir fazer os testes na api barriga react', () => {
     let token
 
     before(() => {
